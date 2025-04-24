@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 4d29ade22a966409283e104def267b08
+labels:
+- Car
+- Vehicle
+- PickUp
+- Trunk
+- Minivan
+- Van
+- Cargo
+- Truck
+- Transport
+- Delivery
+timeCreated: 1449480904
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

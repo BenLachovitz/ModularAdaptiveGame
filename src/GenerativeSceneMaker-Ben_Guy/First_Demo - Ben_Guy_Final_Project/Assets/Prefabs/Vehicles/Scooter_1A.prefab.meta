@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9047730027de14d318034295340cced6
+labels:
+- Vehicle
+- Vespa
+- Motorcycle
+- Moped
+- Scooter
+timeCreated: 1449419971
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

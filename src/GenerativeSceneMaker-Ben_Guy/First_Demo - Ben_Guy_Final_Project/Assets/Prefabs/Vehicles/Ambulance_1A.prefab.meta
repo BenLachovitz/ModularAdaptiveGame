@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 849b06faa98c6452db92815ee89fd615
+labels:
+- Car
+- Vehicle
+- Emergency
+- Sirens
+- Truck
+- Ambulance
+timeCreated: 1449484491
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
