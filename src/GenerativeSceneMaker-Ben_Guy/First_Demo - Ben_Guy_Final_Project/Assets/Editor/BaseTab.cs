@@ -25,6 +25,18 @@ public abstract class BaseTab
             return;
         }
 
+        Terrain terrain = terrainTransform.GetComponent<Terrain>();
+        if (terrain == null)
+        {
+            Debug.LogWarning("Terrain component not found. Skipping generation.");
+            return;
+        }
+
+        // Get terrain dimensions
+        float terrainLength = terrain.terrainData.size.z;
+        float terrainWidth = terrain.terrainData.size.x;
+        Vector3 terrainPosition = terrain.transform.position;
+
         float prefabHeight = 0;
         Vector3 prefabSize = Vector3.one; // Default size if no renderer found
         float bottomOffset = 0; // Distance from pivot to bottom of the prefab
@@ -80,19 +92,20 @@ public abstract class BaseTab
         int maxAttempts = count * 50; // Increase attempts significantly
         int attempts = 0;
 
-        float terrainLength = terrainTransform.GetComponent<Terrain>().terrainData.size.z;
-        float terrainWidth = terrainTransform.GetComponent<Terrain>().terrainData.size.x;
+        // Calculate boundary margins based on prefab size to ensure it stays within terrain
+        float marginX = prefabSize.x / 2;
+        float marginZ = prefabSize.z / 2;
 
         while (successfulPlacements < count && attempts < maxAttempts)
         {
             attempts++;
 
-            // Generate random position
-            float x = Random.Range(0f, terrainLength);
-            float z = Random.Range(0f, terrainWidth);
+            // Generate random position within terrain bounds minus margins
+            float x = Random.Range(marginX, terrainWidth - marginX);
+            float z = Random.Range(marginZ, terrainLength - marginZ);
             float y = 0 - bottomOffset; // Position at ground level
 
-            Vector3 worldPosition = new Vector3(x, y, z) + terrainTransform.position;
+            Vector3 worldPosition = new Vector3(x, y, z) + terrainPosition;
 
             // Calculate the center position for the bounds check
             Vector3 boundsCenter = worldPosition + new Vector3(0, prefabHeight / 2 + bottomOffset, 0);
@@ -106,6 +119,13 @@ public abstract class BaseTab
                     prefabSize.z + collisionCheckBuffer
                 )
             );
+
+            // Check if the bounds are entirely within the terrain
+            bool withinTerrainBounds = IsWithinTerrainBounds(newObjectBounds, terrainPosition, terrainWidth, terrainLength);
+            if (!withinTerrainBounds)
+            {
+                continue; // Skip this position if outside terrain bounds
+            }
 
             // First check: see if this intersects with any placed bounds
             bool positionIsFree = true;
@@ -178,6 +198,20 @@ public abstract class BaseTab
         }
     }
 
+    // Helper method to check if object bounds are entirely within terrain bounds
+    private bool IsWithinTerrainBounds(Bounds objectBounds, Vector3 terrainPosition, float terrainWidth, float terrainLength)
+    {
+        // Calculate terrain corners in world space
+        float minX = terrainPosition.x;
+        float maxX = terrainPosition.x + terrainWidth;
+        float minZ = terrainPosition.z;
+        float maxZ = terrainPosition.z + terrainLength;
+
+        // Check if object bounds are entirely within terrain bounds
+        return (objectBounds.min.x >= minX && objectBounds.max.x <= maxX &&
+                objectBounds.min.z >= minZ && objectBounds.max.z <= maxZ);
+    }
+
     // Common method for prefab generation
     protected void GeneratePrefabs(List<GameObject> selectedPrefabs, List<int> counts)
     {
@@ -187,7 +221,6 @@ public abstract class BaseTab
             Debug.LogWarning("There is no terrain generated in the scene. Please generate one before adding objects.");
             return;
         }
-
         terrainGameObject = existingTerrain.gameObject;
         List<Bounds> globalPlacedBounds = new List<Bounds>(); // Shared bounds list
 
