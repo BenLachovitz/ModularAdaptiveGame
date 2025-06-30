@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3696bea5f7463423a90abba9bd1c4372
+labels:
+- Car
+- Vehicle
+- Emergency
+- Sirens
+- Truck
+- Firetruck
+timeCreated: 1449497419
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

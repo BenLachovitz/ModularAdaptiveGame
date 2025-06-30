@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 63475a9848505479d9e1b6f1595cbe53
+labels:
+- Car
+- Vehicle
+- SportsCar
+- Coupe
+- Tuning
+- Muscle
+- Luxury
+- Aerodynamic
+timeCreated: 1449484967
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

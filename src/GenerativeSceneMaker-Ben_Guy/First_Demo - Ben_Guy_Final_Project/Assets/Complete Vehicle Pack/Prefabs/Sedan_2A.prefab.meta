@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80145d698d70a446f81833acfc376e91
+labels:
+- Car
+- Vehicle
+- Limousine
+- Executive
+- Sedan
+- Luxury
+timeCreated: 1449485307
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

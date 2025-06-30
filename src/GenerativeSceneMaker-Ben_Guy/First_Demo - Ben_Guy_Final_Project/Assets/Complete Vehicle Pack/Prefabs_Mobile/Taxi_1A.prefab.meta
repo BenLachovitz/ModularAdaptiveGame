@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c743f6243e7f64ac695f16605dc7e2be
+labels:
+- Car
+- Vehicle
+- Advert
+- Cab
+- Taxi
+- Sedan
+- Transport
+timeCreated: 1449497976
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

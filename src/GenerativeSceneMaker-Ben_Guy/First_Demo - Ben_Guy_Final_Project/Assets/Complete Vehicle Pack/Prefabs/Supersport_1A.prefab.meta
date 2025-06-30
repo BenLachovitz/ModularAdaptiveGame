@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c17c8e856a2574481b15b4a5bfb33ec1
+labels:
+- Car
+- Vehicle
+- Coupe
+- SportsCar
+- Muscle
+- Aerodynamic
+- Supercar
+- Hypercar
+- Supersport
+timeCreated: 1449450527
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

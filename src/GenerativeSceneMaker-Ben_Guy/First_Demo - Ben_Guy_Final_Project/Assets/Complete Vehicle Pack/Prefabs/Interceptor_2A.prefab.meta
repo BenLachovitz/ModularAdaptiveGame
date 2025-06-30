@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 66777f23adda147aa8c8fd1c5f9e98f5
+labels:
+- Car
+- Emergency
+- Interceptor
+- Muscle
+- Police
+- PoliceCar
+- Sirens
+- Vehicle
+timeCreated: 1469011120
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

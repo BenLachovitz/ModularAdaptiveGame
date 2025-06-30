@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 416dba8dda27b4baa873313f6b88e504
+labels:
+- Car
+- Vehicle
+- HotHatch
+- SportsCar
+- Compact
+timeCreated: 1449497115
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
