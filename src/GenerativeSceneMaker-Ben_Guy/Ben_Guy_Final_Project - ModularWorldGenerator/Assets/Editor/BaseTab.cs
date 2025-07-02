@@ -10,6 +10,7 @@ public abstract class BaseTab
     protected static List<BuildingArea> buildingAreas = new List<BuildingArea>();
     protected static List<RoadArea> roadAreas = new List<RoadArea>();
     protected static bool isCityMode = false;
+    protected static bool allLayersExist = false;
 
     public abstract void OnGUI();
     protected Terrain GetExistingTerrain()

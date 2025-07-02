@@ -59,6 +59,7 @@ public abstract class PrefabTab : BaseTab
 
     private void saveAttributes()
     {
+        if (!terrainGameObject) return;
         try
         {
             attributeData.selectedPrefabs = this.selectedPrefabs;

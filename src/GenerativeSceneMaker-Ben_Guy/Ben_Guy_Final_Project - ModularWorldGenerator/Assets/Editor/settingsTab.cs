@@ -9,16 +9,15 @@ using System.Linq;
 
 public class settingsTab : BaseTab
 {
+    private string sceneNameToSave = "";
+    private string PreferencesNameToSave = "";
 
-    string sceneNameToSave = "";
-    string PreferencesNameToSave = "";
+    private int selectedIndex;
+    private int tempIndex = 0;
 
-    int selectedIndex;
-    int tempIndex = 0;
-
-    string licenseKeyInput = "";
-    string licenseStatusMessage = "";
-    bool isValidatingLicense = false;
+    private string licenseKeyInput = "";
+    private string licenseStatusMessage = "";
+    private bool isValidatingLicense = false;
 
     public override void OnGUI()
     {
@@ -182,7 +181,7 @@ public class settingsTab : BaseTab
 
         EditorGUILayout.HelpBox("This will create the required layers for NPC and vehicle movement.", MessageType.Info);
 
-        bool allLayersExist = AllRequiredLayersExist();
+        allLayersExist = AllRequiredLayersExist();
 
         GUI.enabled = !allLayersExist;
 

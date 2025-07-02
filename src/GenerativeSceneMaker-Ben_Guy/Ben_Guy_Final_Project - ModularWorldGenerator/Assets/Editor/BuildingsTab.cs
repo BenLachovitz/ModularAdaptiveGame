@@ -358,6 +358,8 @@ public class BuildingsTab : PrefabTab
                 if (successfulPlacements >= count)
                     return successfulPlacements;
             }
+            // To see the grid placement
+            DebugDrawGrid(buildingArea);
         }
         return successfulPlacements;
     }
@@ -548,8 +550,9 @@ public class BuildingsTab : PrefabTab
                 if (successfulPlacements >= count)
                     return successfulPlacements;
             }
+            // To see the grid placement
+            DebugDrawGrid(buildingArea);
         }
-
         return successfulPlacements;
     }
 
@@ -750,5 +753,18 @@ public class BuildingsTab : PrefabTab
             }
         }
         GeneratePrefabs(selectedPrefabs, prefabCounts);
+    }
+
+    private void DebugDrawGrid(BuildingArea buildingArea)
+    {
+        for (int x = 0; x < buildingArea.GridWidth; x++)
+        {
+            for (int z = 0; z < buildingArea.GridLength; z++)
+            {
+                Vector3 center = buildingArea.GridToWorld(x, z) + Vector3.up * 0.2f;
+                Color color = buildingArea.CanPlaceAt(x, z, 1, 1) ? Color.green : Color.red;
+                Debug.DrawRay(center, Vector3.up * 1f, color, 5f);
+            }
+        }
     }
 }

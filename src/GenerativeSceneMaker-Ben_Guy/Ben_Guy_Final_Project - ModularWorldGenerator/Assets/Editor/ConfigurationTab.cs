@@ -443,6 +443,11 @@ public class ConfigurationTab : BaseTab
             EditorGUILayout.HelpBox("Please select materials for all surfaces", MessageType.Error);
 
         GUILayout.Label("");
+        if (!allLayersExist)
+        {
+            GUI.enabled = false;
+            EditorGUILayout.HelpBox("Please create all necessary layers. For that go to settings tab.", MessageType.Error);
+        }
         if (GUILayout.Button("Create Scene"))
         {
             if (planeMaterial != null && roadMaterial != null && parkMaterial != null)
@@ -464,6 +469,7 @@ public class ConfigurationTab : BaseTab
             else
                 materialsError = true;
         }
+        GUI.enabled = true;
     }
 
     private void LoadMaterialsFromFolder()
