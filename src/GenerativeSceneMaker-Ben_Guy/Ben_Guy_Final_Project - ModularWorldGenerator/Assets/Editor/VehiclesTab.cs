@@ -6,7 +6,7 @@ using System.Linq;
 public class VehiclesTab : PrefabTab
 {
     private float vehiclePadding = 2.0f;
-    public VehiclesTab() : base("Vehicles", "Assets/Prefabs/Vehicles")
+    public VehiclesTab() : base("Vehicles", "Assets/ModularWorldTool/Prefabs/Vehicles")
     {
 
     }

@@ -127,6 +127,7 @@ public class ConfigurationTab : BaseTab
             attributeData.roadMaterial = this.newRoadMatIndex;
             attributeData.parkMaterial = this.newParkMatIndex;
             attributeData.crosswalkMaterial = this.newcrossMatIndex;
+            attributeData.isAllLayersExist = allLayersExist;
 
             string json = JsonUtility.ToJson(attributeData, true);
             string key = $"{GetType().Name}_AttributeData";
@@ -157,6 +158,8 @@ public class ConfigurationTab : BaseTab
                     this.numHorizontalRoads = attributeData.horizontalRoads;
                     this.numVerticalRoads = attributeData.verticalRoads;
                     this.newBuildingMatIndex = attributeData.buildingAreaMaterial;
+                    allLayersExist = attributeData.isAllLayersExist;
+                    findTerrainAsGameObject();
                     if (newBuildingMatIndex > 0 && newBuildingMatIndex < availableMaterials.Count + 1) 
                         planeMaterial = availableMaterials[newBuildingMatIndex - 1];
                     this.newRoadMatIndex = attributeData.roadMaterial;
@@ -220,6 +223,7 @@ public class ConfigurationTab : BaseTab
             crosswalkMaterial = availableMaterials[newcrossMatIndex - 1];
 
         }
+
     }
 
 
@@ -241,7 +245,6 @@ public class ConfigurationTab : BaseTab
 
         if (newcrossMatIndex > 0)
             crosswalk = this.availableMaterials[newcrossMatIndex - 1].name;
-
         return new ConfigurationData
         {
             terrainLength = this.chosenTerrainLength,
@@ -448,6 +451,10 @@ public class ConfigurationTab : BaseTab
             GUI.enabled = false;
             EditorGUILayout.HelpBox("Please create all necessary layers. For that go to settings tab.", MessageType.Error);
         }
+        else
+        {
+            GUI.enabled = true;
+        }
         if (GUILayout.Button("Create Scene"))
         {
             if (planeMaterial != null && roadMaterial != null && parkMaterial != null)
@@ -476,7 +483,7 @@ public class ConfigurationTab : BaseTab
     {
         availableMaterials.Clear();
 
-        string folderPath = "Assets/Materials/Materials";
+        string folderPath = "Assets/ModularWorldTool/Materials/Materials";
 
         if (!System.IO.Directory.Exists(folderPath))
         {
@@ -1526,42 +1533,7 @@ public class ConfigurationTab : BaseTab
     private GameObject CreateDirectionalRoadPlane(string name, float width, float height, Vector3 position, int direction)
     {
         GameObject roadSegment = CreatePlane(name, width, height, position);
-        CreateDirectionalNavMeshSurface(roadSegment, direction);
         return roadSegment;
-    }
-
-    private void CreateDirectionalNavMeshSurface(GameObject roadSegment, int direction)
-    {
-        GameObject navMeshGuide = new GameObject("NavMeshGuide");
-        navMeshGuide.transform.SetParent(roadSegment.transform);
-
-        Vector3 offset = Vector3.zero;
-        Vector3 scale = Vector3.one;
-
-        switch (direction)
-        {
-            case 0: // East-bound horizontal
-                offset = new Vector3(roadWidth * 0.15f, 0, 0); // Shift slightly east
-                scale = new Vector3(0.7f, 1f, 1f);
-                break;
-            case 1: // West-bound horizontal  
-                offset = new Vector3(-roadWidth * 0.15f, 0, 0); // Shift slightly west
-                scale = new Vector3(0.7f, 1f, 1f);
-                break;
-            case 2: // North-bound vertical
-                offset = new Vector3(0, 0, roadWidth * 0.15f); // Shift slightly north
-                scale = new Vector3(1f, 1f, 0.7f);
-                break;
-            case 3: // South-bound vertical
-                offset = new Vector3(0, 0, -roadWidth * 0.15f); // Shift slightly south
-                scale = new Vector3(1f, 1f, 0.7f);
-                break;
-        }
-
-        navMeshGuide.transform.localPosition = offset;
-        navMeshGuide.transform.localScale = scale;
-
-        navMeshGuide.tag = "Road";
     }
 
     private void GenerateMainRoadsWithCrosswalks(GameObject mainRoadsContainer)
@@ -2273,7 +2245,7 @@ public class ConfigurationTab : BaseTab
     {
         treePrefabs.Clear();
 
-        string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Prefabs/For Parks/Trees" });
+        string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/ModularWorldTool/Prefabs/For Parks/Trees" });
 
         foreach (string guid in prefabGuids)
         {

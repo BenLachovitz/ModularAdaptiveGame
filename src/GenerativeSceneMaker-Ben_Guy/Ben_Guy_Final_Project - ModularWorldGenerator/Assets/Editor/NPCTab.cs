@@ -8,7 +8,7 @@ using System.Dynamic;
 
 public class NPCTab : PrefabTab
 {
-    public NPCTab() : base("NPC", "Assets/Prefabs/NPC")
+    public NPCTab() : base("NPC", "Assets/ModularWorldTool/Prefabs/NPC")
     {
     }
 
@@ -224,7 +224,7 @@ public class NPCTab : PrefabTab
             animator = npcInstance.AddComponent<Animator>();
         }
 
-        string animatorControllerPath = "Assets/Animation/WalkController.controller";
+        string animatorControllerPath = "Assets/ModularWorldTool/Animation/WalkController.controller";
         RuntimeAnimatorController controller = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(animatorControllerPath);
 
         if (controller != null)

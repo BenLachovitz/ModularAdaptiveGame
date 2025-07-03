@@ -5,7 +5,7 @@ using System.Linq;
 
 public class BuildingsTab : PrefabTab
 {
-    public BuildingsTab() : base("Buildings", "Assets/Prefabs/Buildings")
+    public BuildingsTab() : base("Buildings", "Assets/ModularWorldTool/Prefabs/Buildings")
     {
     }
 

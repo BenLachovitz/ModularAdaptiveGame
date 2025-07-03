@@ -15,4 +15,5 @@ public class ConfigurationAttributeData
     public int roadMaterial;
     public int parkMaterial;
     public int crosswalkMaterial;
+    public bool isAllLayersExist;
 }

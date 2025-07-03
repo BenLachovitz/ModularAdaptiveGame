@@ -28,7 +28,7 @@ public abstract class BaseTab
     {
     }
 
-    protected void GeneratePrefabs(List<GameObject> selectedPrefabs, List<int> counts)
+    protected void findTerrainAsGameObject()
     {
         Terrain existingTerrain = GetExistingTerrain();
         if (existingTerrain == null)
@@ -37,6 +37,11 @@ public abstract class BaseTab
             return;
         }
         terrainGameObject = existingTerrain.gameObject;
+    }
+
+    protected void GeneratePrefabs(List<GameObject> selectedPrefabs, List<int> counts)
+    {
+        findTerrainAsGameObject();
         List<Bounds> globalPlacedBounds = new List<Bounds>(); 
 
         // Define cluster size - how many of each prefab to place at once
